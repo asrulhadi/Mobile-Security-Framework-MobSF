@@ -18,7 +18,9 @@ def connect(toolsdir):
     wait(5)
     print("\n[INFO] Connecting to VM/Device")
     out = subprocess.check_output([adb, "connect", get_identifier()])
-    if b"unable to connect" in out:
+    if settings.ANDROID_CONNECTION == "USB":
+        pass
+    elif b"unable to connect" in out:
         raise ValueError("ERROR Connecting to VM/Device. ", out.decode("utf-8").replace("\n",""))
     try:
         subprocess.call([adb, "-s", get_identifier(), "wait-for-device"])
@@ -94,7 +96,10 @@ def get_identifier():
     """Get Device Type"""
     try:
         if settings.ANDROID_DYNAMIC_ANALYZER == "MobSF_REAL_DEVICE":
-            return settings.DEVICE_IP + ":" + str(settings.DEVICE_ADB_PORT)
+            if settings.ANDROID_CONNECTION == "USB":
+                return settings.ANDROID_SERIAL
+            else:
+                return settings.DEVICE_IP + ":" + str(settings.DEVICE_ADB_PORT)
         elif settings.ANDROID_DYNAMIC_ANALYZER == "MobSF_AVD":
             return 'emulator-' + str(settings.AVD_ADB_PORT)
         else:

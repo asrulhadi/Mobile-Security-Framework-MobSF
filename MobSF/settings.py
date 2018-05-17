@@ -22,13 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #==============================================
 
 MOBSF_VER = "v1.0 Beta"
-BANNER = """
-  __  __       _    ____  _____         _   ___  
- |  \/  | ___ | |__/ ___||  ___| __   _/ | / _ \ 
+BANNER = r"""
+  __  __       _    ____  _____         _   ___
+ |  \/  | ___ | |__/ ___||  ___| __   _/ | / _ \
  | |\/| |/ _ \| '_ \___ \| |_    \ \ / / || | | |
  | |  | | (_) | |_) |__) |  _|    \ V /| || |_| |
- |_|  |_|\___/|_.__/____/|_|       \_/ |_(_)___/ 
-        
+ |_|  |_|\___/|_.__/____/|_|       \_/ |_(_)___/
+
 """
 # ASCII Standard
 #==============================================
@@ -322,7 +322,7 @@ else:
 
     #========ANDROID DYNAMIC ANALYSIS SETTINGS================================
 
-    ANDROID_DYNAMIC_ANALYZER = "MobSF_VM"
+    ANDROID_DYNAMIC_ANALYZER = "MobSF_REAL_DEVICE"
 
     # You can choose any of the below
     # 1. MobSF_VM
@@ -339,7 +339,9 @@ else:
     #=========================================================================
 
     #=======ANDROID REAL DEVICE SETTINGS===========
-    DEVICE_IP = '192.168.1.18'
+    ANDROID_CONNECTION = "USB
+    ANDROID_SERIAL = "0123456789ABCDEF"
+    DEVICE_IP = '192.148.42.234'
     DEVICE_ADB_PORT = 5555
     DEVICE_TIMEOUT = 300
     #==============================================
@@ -356,11 +358,11 @@ else:
 
     #====ANDROID MOBSF VIRTUALBOX VM SETTINGS =====
     # VM UUID
-    UUID = '408e1874-759f-4417-9453-53ef21dc2ade'
+    UUID = '9c1bdc84-b42d-498a-8b72-0eb3c5c79a76'
     # Snapshot UUID
-    SUUID = '5c9deb28-def6-49c0-9233-b5e03edd85c6'
+    SUUID = 'ac7f0b62-9a07-4b0f-92d5-12767ac313fd'
     # IP of the MobSF VM
-    VM_IP = '192.168.56.101'
+    VM_IP = '172.16.42.129'
     VM_ADB_PORT = 5555
     VM_TIMEOUT = 100
     #==============================================
@@ -370,8 +372,8 @@ else:
     #--------------------------
 
     #================HOST/PROXY SETTINGS ===============
-    PROXY_IP = '192.168.56.1'  # Host/Server/Proxy IP
-    PORT = 1337  # Proxy Port
+    PROXY_IP = '192.168.42.35'  # Host/Server/Proxy IP
+    PORT = 4234  # Proxy Port
     ROOT_CA = '0026aabb.0'
     SCREEN_IP = PROXY_IP  # ScreenCast IP
     SCREEN_PORT = 9339  # ScreenCast Port(Do not Change)
@@ -380,7 +382,7 @@ else:
     #========UPSTREAM PROXY SETTINGS ==============
     # If you are behind a Proxy
     UPSTREAM_PROXY_ENABLED = False
-    UPSTREAM_PROXY_SSL_VERIFY = True
+    UPSTREAM_PROXY_SSL_VERIFY = False
     UPSTREAM_PROXY_TYPE = "http"
     UPSTREAM_PROXY_IP = "127.0.0.1"
     UPSTREAM_PROXY_PORT = 3128
@@ -392,7 +394,7 @@ else:
     # MALWARE ANALYZER SETTINGS
     #--------------------------
 
-    DOMAIN_MALWARE_SCAN = True
+    DOMAIN_MALWARE_SCAN = False
 
     #========DISABLED COMPONENTS===================
 

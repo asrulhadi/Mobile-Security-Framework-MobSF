@@ -13,6 +13,7 @@ import shutil
 import unicodedata
 import threading
 import sqlite3 as sq
+from datetime import datetime
 
 from django.shortcuts import render
 from django.conf import settings
@@ -193,6 +194,7 @@ def take_screenshot(request):
             if re.match('^[0-9a-f]{32}$', md5_hash):
                 data = {}
                 rand_int = random.randint(1, 1000000)
+                dt = datetime.now().strftime("%Y%m%dT%H%M%S")
                 base_dir = settings.BASE_DIR
                 # make sure that list only png from this directory
                 screen_dir = os.path.join(
@@ -208,13 +210,13 @@ def take_screenshot(request):
                                  "shell",
                                  "screencap",
                                  "-p",
-                                 "/data/local/screen.png"])
+                                 "/data/local/tmp/screen.png"])
                 subprocess.call([adb,
                                  "-s",
                                  get_identifier(),
                                  "pull",
-                                 "/data/local/screen.png",
-                                 screen_dir + "screenshot-" + str(rand_int) + ".png"])
+                                 "/data/local/tmp/screen.png",
+                                 screen_dir + "screenshot-" + dt + ".png"])
                 print("\n[INFO] Screenshot Taken")
                 data = {'screenshot': 'yes'}
                 return HttpResponse(json.dumps(data), content_type='application/json')
@@ -502,12 +504,22 @@ def final_test(request):
                 os.system(adb + ' -s ' + get_identifier() +
                           ' logcat -d dalvikvm:W ActivityManager:I > "' + apk_dir + 'logcat.txt"')
                 print("\n[INFO] Downloading Logcat logs")
-                subprocess.call([adb,
+                r = subprocess.call([adb,
                                  "-s",
                                  get_identifier(),
                                  "pull",
                                  "/data/data/de.robv.android.xposed.installer/log/error.log",
                                  apk_dir + "x_logcat.txt"])
+                # in case of error - permission problem
+                if r == 1:
+                    adb_cmd = [adb, "-s", get_identifier()]
+                    adb_su = adb_cmd + ["shell", "su", "-c"]
+                    xposed_log = "/data/data/de.robv.android.xposed.installer/log/error.log"
+                    tmp_log = "/data/local/tmp/x_logcat.txt"
+                    subprocess.call(adb_su + ["cp", "-f", xposed_log, tmp_log])
+                    subprocess.call(adb_su + ["chmod", "666", tmp_log])
+                    subprocess.call(adb_cmd + ["pull", tmp_log, apk_dir + "x_logcat.txt"])
+                    subprocess.call(adb_su + ["rm", tmp_log])
 
                 print("\n[INFO] Downloading Droidmon API Monitor Logcat logs")
                 # Can't RCE
