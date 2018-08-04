@@ -87,6 +87,7 @@ def printMobSFverison():
 
 
 def check_update():
+    if True: return
     try:
         print("[INFO] Checking for Update.")
         github_url = "https://raw.githubusercontent.com/MobSF/Mobile-Security-Framework-MobSF/master/MobSF/settings.py"
