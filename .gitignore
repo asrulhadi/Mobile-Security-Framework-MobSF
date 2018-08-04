@@ -63,8 +63,8 @@ classes-error.zip
 
 #MobSF Files
 logs/
-uploads/
-db.sqlite3
+uploads*/
+db*.sqlite3
 secret
 
 #IntelliJ IDE
