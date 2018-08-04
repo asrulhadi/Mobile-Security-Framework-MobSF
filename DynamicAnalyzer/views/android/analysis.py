@@ -212,6 +212,7 @@ def run_analysis(apk_dir, md5_hash, package):
                             escape(fileparam) + "&md5=" + md5_hash + "&type=" + \
                             typ + "'>" + escape(fileparam) + "</a></td><tr>"
                     else:
+                        if os.stat(file_path).st_size < 7: continue
                         with io.open(file_path, mode='r', encoding="utf8", errors="ignore") as flip:
                             file_cnt_sig = flip.read(6)
                         if file_cnt_sig == "SQLite":

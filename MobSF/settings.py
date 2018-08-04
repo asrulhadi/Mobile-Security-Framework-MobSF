@@ -339,9 +339,9 @@ else:
     #=========================================================================
 
     #=======ANDROID REAL DEVICE SETTINGS===========
-    ANDROID_CONNECTION = "USB
+    ANDROID_CONNECTION = "USB"
     ANDROID_SERIAL = "0123456789ABCDEF"
-    DEVICE_IP = '192.148.42.234'
+    DEVICE_IP = '192.168.34.100'
     DEVICE_ADB_PORT = 5555
     DEVICE_TIMEOUT = 300
     #==============================================
@@ -372,8 +372,8 @@ else:
     #--------------------------
 
     #================HOST/PROXY SETTINGS ===============
-    PROXY_IP = '192.168.42.35'  # Host/Server/Proxy IP
-    PORT = 4234  # Proxy Port
+    PROXY_IP = '10.0.60.146'  # Host/Server/Proxy IP
+    PORT = 4235  # Proxy Port
     ROOT_CA = '0026aabb.0'
     SCREEN_IP = PROXY_IP  # ScreenCast IP
     SCREEN_PORT = 9339  # ScreenCast Port(Do not Change)
@@ -385,7 +385,7 @@ else:
     UPSTREAM_PROXY_SSL_VERIFY = False
     UPSTREAM_PROXY_TYPE = "http"
     UPSTREAM_PROXY_IP = "127.0.0.1"
-    UPSTREAM_PROXY_PORT = 3128
+    UPSTREAM_PROXY_PORT = 4234
     UPSTREAM_PROXY_USERNAME = ""
     UPSTREAM_PROXY_PASSWORD = ""
     #==============================================

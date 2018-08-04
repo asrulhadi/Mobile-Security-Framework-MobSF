@@ -703,14 +703,14 @@ def exported_activity_tester(request):
                                      get_identifier(),
                                      "shell", "screencap",
                                      "-p",
-                                     "/data/local/screen.png"])
+                                     "/data/local/tmp/screen.png"])
                                 #? get appended from Air :-() if activity names are used
                                 subprocess.call(
                                     [adb,
                                      "-s",
                                      get_identifier(),
                                      "pull",
-                                     "/data/local/screen.png",
+                                     "/data/local/tmp/screen.png",
                                      screen_dir + "expact-" + str(exp_act_no) + ".png"])
                                 print("\n[INFO] Activity Screenshot Taken")
                                 subprocess.call(
@@ -801,14 +801,14 @@ def activity_tester(request):
                                      "shell",
                                      "screencap",
                                      "-p",
-                                     "/data/local/screen.png"])
+                                     "/data/local/tmp/screen.png"])
                                 #? get appended from Air :-() if activity names are used
                                 subprocess.call(
                                     [adb,
                                      "-s",
                                      get_identifier(),
                                      "pull",
-                                     "/data/local/screen.png",
+                                     "/data/local/tmp/screen.png",
                                      screen_dir + "act-" + str(act_no) + ".png"])
                                 print("\n[INFO] Activity Screenshot Taken")
                                 subprocess.call([adb,
